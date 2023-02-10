@@ -10,6 +10,9 @@ const app=express();
 const jwt=require('jsonwebtoken');
 const bcryptSalt=bcrypt.genSaltSync(10);
 const JWT_TOKEN_SECRET='jwtsachinsecrettoken';
+const imageDownloader=require('image-downloader');
+
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
@@ -74,5 +77,20 @@ const {name,email,_id} = await User.findById(userData.id);
     }
     
 })
+app.post('/logout',(req,res)=>{
+res.cookie('token','').json(true);
+});
 
+console.log({__dirname});
+app.post('/upload-by-link',async (req,rer)=>{
+    const{link}=req.body;
+    const newName=Date.now()+'.jpg';
+    await imageDownloader.image({
+        url:link,
+        dest:__dirname+'/uploads/'+newName,
+
+    });
+res.json(__dirname+'/uploads/'+newName);
+
+})
 app.listen(4000);

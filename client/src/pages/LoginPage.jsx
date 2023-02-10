@@ -38,7 +38,7 @@ if(redirect){
     <input type='password' placeholder='password'
                                               value={password}
                                                 onChange={ev=>setPassword(ev.target.value)}/>
-    <button className='primary'>Login</button>
+    <button className='bg-primary p-2 w-full text-white rounded-2xl'>Login</button>
     <div className='text-center py-2 text-gray-500'>
         Don't have a n account yet? <Link className='underline text-bn' to={'/register'}>Register now</Link>
     
